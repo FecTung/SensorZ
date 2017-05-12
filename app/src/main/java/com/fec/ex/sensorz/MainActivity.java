@@ -7,6 +7,7 @@ import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     /**
@@ -15,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
 
+    private TextView mTvShowAxis;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        mTvShowAxis = (TextView) findViewById(R.id.tvShowAxis);
     }
 
     @Override
@@ -43,7 +48,10 @@ public class MainActivity extends AppCompatActivity {
     private SensorEventListener mAccelerometerListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            Log.d("onSensorChanged: ", event.toString());
+//            Log.d("Accelerometer: ", "X:" + event.values[0]);
+//            Log.d("Accelerometer: ", "Y:" + event.values[1]);
+//            Log.d("Accelerometer: ", "Z:" + event.values[2]);
+            mTvShowAxis.setText("X: " + event.values[0] + "\nY: " + event.values[1] + "\nZ: " + event.values[2]);
         }
 
         @Override
