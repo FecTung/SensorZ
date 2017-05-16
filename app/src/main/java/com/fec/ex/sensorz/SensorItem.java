@@ -4,7 +4,7 @@ package com.fec.ex.sensorz;
  * Created by USFec on 2017.05.16.
  */
 
-public class Sensor {
+public class SensorItem {
 
     private String sensorName;
     private String sensorValue;
@@ -12,7 +12,7 @@ public class Sensor {
     private int imgID;
     private boolean hasSensor;
 
-    public Sensor(String sensorName, String sensorValue, String sensorCal, int imgID, boolean hasSensor) {
+    public SensorItem(String sensorName, String sensorValue, String sensorCal, int imgID, boolean hasSensor) {
         this.sensorName = sensorName;
         this.sensorValue = sensorValue;
         this.SensorCal = sensorCal;
@@ -20,12 +20,12 @@ public class Sensor {
         this.hasSensor = hasSensor;
     }
 
-    public Sensor(String sensorName, String sensorValue) {
+    public SensorItem(String sensorName, String sensorValue) {
         this.sensorName = sensorName;
         this.sensorValue = sensorValue;
     }
 
-    public Sensor() {
+    public SensorItem() {
     }
 
     public String getSensorName() {
