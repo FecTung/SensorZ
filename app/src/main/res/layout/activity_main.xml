@@ -1,20 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
     tools:context="com.fec.ex.sensorz.MainActivity">
-
     <TextView
-        android:id="@+id/tvShowAxis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</android.support.constraint.ConstraintLayout>
+        style="@style/SensorLabelTV"
+        android:text="Accelerometer"/>
+    <TextView
+        android:id="@+id/tvAccelerometer"
+        style="@style/SensorValuesTV"/>
+    <TextView
+        style="@style/SensorLabelTV"
+        android:text="Ambient Temperature"/>
+    <TextView
+        android:id="@+id/tvAmbientTemperature"
+        style="@style/SensorValuesTV"/>
+    <TextView
+        style="@style/SensorLabelTV"
+        android:text="Gravity"/>
+    <TextView
+        android:id="@+id/tvGravity"
+        style="@style/SensorValuesTV"/>
+    <TextView
+        style="@style/SensorLabelTV"
+        android:text="Gyroscope"/>
+    <TextView
+        android:id="@+id/tvGyroscope"
+        style="@style/SensorValuesTV"/>
+    <TextView
+        style="@style/SensorLabelTV"
+        android:text="Light"/>
+    <TextView
+        android:id="@+id/tvLight"
+        style="@style/SensorValuesTV"/>
+    <TextView
+        style="@style/SensorLabelTV"
+        android:text="Linear Acceleration"/>
+    <TextView
+        android:id="@+id/tvLinearAcceleration"
+        style="@style/SensorValuesTV"/>
+    <TextView
+        style="@style/SensorLabelTV"
+        android:text="Magnetic Field"/>
+    <TextView
+        android:id="@+id/tvMagneticField"
+        style="@style/SensorValuesTV"/>
+    <TextView
+        style="@style/SensorLabelTV"
+        android:text="Pressure"/>
+    <TextView
+        android:id="@+id/tvPressure"
+        style="@style/SensorValuesTV"/>
+    <TextView
+        style="@style/SensorLabelTV"
+        android:text="Proximity"/>
+    <TextView
+        android:id="@+id/tvProximity"
+        style="@style/SensorValuesTV"/>
+    <TextView
+        style="@style/SensorLabelTV"
+        android:text="Humidity"/>
+    <TextView
+        android:id="@+id/tvHumidity"
+        style="@style/SensorValuesTV"/>
+    <TextView
+        style="@style/SensorLabelTV"
+        android:text="Rotation Vector"/>
+    <TextView
+        android:id="@+id/tvRotationVector"
+        style="@style/SensorValuesTV"/>
+</LinearLayout>
