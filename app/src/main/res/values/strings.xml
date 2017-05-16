@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SensorZ</string>
+    <string name="sensorName">Sensor Name</string>
 </resources>
