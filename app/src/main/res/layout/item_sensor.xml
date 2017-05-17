@@ -1,24 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="#FEFEFE"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="2dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:padding="4dp"
+    android:clickable="true"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/tvSensorItemName"
             android:text="@string/sensorName"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#f4f4f4"
-            android:paddingTop="8dp" />
+            android:paddingTop="8dp"
+            android:paddingStart="4dp"/>
         <TextView
             android:id="@+id/tvSensorItemValues"
             android:textSize="12sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="4dp"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
             android:layout_below="@id/tvSensorItemName"/>
