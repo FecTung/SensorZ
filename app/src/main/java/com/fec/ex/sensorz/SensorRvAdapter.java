@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by USFec on 2017.05.16.
+ * Created by Fe2Cu on 2017.05.16.
  */
 
 public class SensorRvAdapter extends RecyclerView.Adapter<SensorRvAdapter.ViewHolder> {
@@ -45,8 +45,8 @@ public class SensorRvAdapter extends RecyclerView.Adapter<SensorRvAdapter.ViewHo
         TextView tvSensorName = holder.mTVSensorName;
         TextView tvSensorValue = holder.mTVSensorValue;
 
-        tvSensorName.setText("Name");
-        tvSensorName.setText("Value");
+        tvSensorName.setText(sensorItem.getSensorName());
+        tvSensorValue.setText(sensorItem.getSensorValue());
 
     }
 
