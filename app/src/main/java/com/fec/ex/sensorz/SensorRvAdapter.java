@@ -15,8 +15,17 @@ import java.util.List;
 
 public class SensorRvAdapter extends RecyclerView.Adapter<SensorRvAdapter.ViewHolder> {
 
+    private OnItemClickListener listener;
     private List<SensorItem> mSensors;
     private Context mContext;
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     public SensorRvAdapter(Context mContext, List<SensorItem> sensors) {
         this.mContext = mContext;
@@ -43,11 +52,10 @@ public class SensorRvAdapter extends RecyclerView.Adapter<SensorRvAdapter.ViewHo
         SensorItem sensorItem = mSensors.get(position);
 
         TextView tvSensorName = holder.mTVSensorName;
-        TextView tvSensorValue = holder.mTVSensorValue;
+        TextView tvSensorType = holder.mTVSensorValue;
 
         tvSensorName.setText(sensorItem.getSensorName());
-        tvSensorValue.setText(sensorItem.getSensorValue());
-
+        tvSensorType.setText(sensorItem.getSensorType() + "");
     }
 
     @Override
@@ -55,16 +63,26 @@ public class SensorRvAdapter extends RecyclerView.Adapter<SensorRvAdapter.ViewHo
         return mSensors.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mTVSensorName;
         private TextView mTVSensorValue;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
-
             mTVSensorName = (TextView) itemView.findViewById(R.id.tvSensorItemName);
-            mTVSensorValue = (TextView) itemView.findViewById(R.id.tvSensorItemValues);
+            mTVSensorValue = (TextView) itemView.findViewById(R.id.tvSensorItemType);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(itemView, position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

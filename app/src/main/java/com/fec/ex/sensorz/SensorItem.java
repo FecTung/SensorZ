@@ -7,48 +7,26 @@ package com.fec.ex.sensorz;
 public class SensorItem {
 
     private String sensorName;
-    private String sensorValue;
-    private String sensorCal;
+    private int sensorType;
     private int imgID;
-    private boolean hasSensor;
+    private String sensorValue;
 
-    public SensorItem(String sensorName, String sensorValue, String sensorCal, int imgID, boolean hasSensor) {
+    public SensorItem(String sensorName, int sensorType, int imgID, String sensorValue) {
         this.sensorName = sensorName;
-        this.sensorValue = sensorValue;
-        this.sensorCal = sensorCal;
+        this.sensorType = sensorType;
         this.imgID = imgID;
-        this.hasSensor = hasSensor;
-    }
-
-    public SensorItem(String sensorName, String sensorValue, String sensorCal, boolean hasSensor) {
-        this.sensorName = sensorName;
-        this.sensorValue = sensorValue;
-        this.sensorCal = sensorCal;
-        this.hasSensor = hasSensor;
-    }
-
-    public SensorItem(String sensorName, String sensorValue, String sensorCal) {
-        this.sensorName = sensorName;
-        this.sensorValue = sensorValue;
-        this.sensorCal = sensorCal;
-    }
-
-    public SensorItem(String sensorName, String sensorValue, boolean hasSensor) {
-        this.sensorName = sensorName;
-        this.sensorValue = sensorValue;
-        this.hasSensor = hasSensor;
-    }
-
-    public SensorItem(String sensorName, String sensorValue) {
-        this.sensorName = sensorName;
         this.sensorValue = sensorValue;
     }
 
-    public SensorItem(String sensorName) {
+    public SensorItem(String sensorName, int sensorType, int imgID) {
         this.sensorName = sensorName;
+        this.sensorType = sensorType;
+        this.imgID = imgID;
     }
 
-    public SensorItem() {
+    public SensorItem(String sensorName, int sensorType) {
+        this.sensorName = sensorName;
+        this.sensorType = sensorType;
     }
 
     public String getSensorName() {
@@ -59,20 +37,12 @@ public class SensorItem {
         this.sensorName = sensorName;
     }
 
-    public String getSensorValue() {
-        return sensorValue;
+    public int getSensorType() {
+        return sensorType;
     }
 
-    public void setSensorValue(String sensorValue) {
-        this.sensorValue = sensorValue;
-    }
-
-    public String getSensorCal() {
-        return sensorCal;
-    }
-
-    public void setSensorCal(String sensorCal) {
-        this.sensorCal = sensorCal;
+    public void setSensorType(int sensorType) {
+        this.sensorType = sensorType;
     }
 
     public int getImgID() {
@@ -83,11 +53,11 @@ public class SensorItem {
         this.imgID = imgID;
     }
 
-    public boolean isHasSensor() {
-        return hasSensor;
+    public String getSensorValue() {
+        return sensorValue;
     }
 
-    public void setHasSensor(boolean hasSensor) {
-        this.hasSensor = hasSensor;
+    public void setSensorValue(String sensorValue) {
+        this.sensorValue = sensorValue;
     }
 }

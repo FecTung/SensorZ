@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fec.ex.sensorz.SensorFragment">
+
+    <TextView
+        android:id="@+id/tvSFSensorName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sensor Name"
+        android:textSize="18sp"
+        android:padding="4dp"/>
+
+    <TextView
+        android:id="@+id/tvSFSensorType"
+        android:layout_below="@id/tvSFSensorName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sensor Type"
+        android:textSize="18sp"
+        android:padding="4dp"/>
+
+</RelativeLayout>
