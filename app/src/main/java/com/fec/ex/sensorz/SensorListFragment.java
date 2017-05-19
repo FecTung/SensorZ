@@ -5,6 +5,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -72,9 +73,11 @@ public class SensorListFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 Sensor sensor = mSensorList.get(position);
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.SensorListPlaceholder, SensorFragment.newInstance(sensor.getName(), sensor.getType()));
-                ft.commit();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.SensorListPlaceholder, SensorFragment.newInstance(sensor.getName(), sensor.getType()))
+                        .addToBackStack("SensorList")
+                        .commit();
             }
         });
 
@@ -85,14 +88,14 @@ public class SensorListFragment extends Fragment {
     private ArrayList<SensorItem> InitSensorItems(List<Sensor> sensorList) {
         ArrayList<SensorItem> sensorItems = new ArrayList<>();
         ArrayList<Integer> sensorIndex = new ArrayList<>();
-        for (Sensor sensor:sensorList) {
+        for (Sensor sensor : sensorList) {
             //Skip the repeated sensors by Sensor.getType()
             if (sensorIndex.contains(sensor.getType())) {
                 continue;
             } else {
                 sensorIndex.add(sensor.getType());
             }
-            sensorItems.add( new SensorItem(sensor.getName(), sensor.getType()));
+            sensorItems.add(new SensorItem(sensor.getName(), sensor.getType()));
         }
         return sensorItems;
     }

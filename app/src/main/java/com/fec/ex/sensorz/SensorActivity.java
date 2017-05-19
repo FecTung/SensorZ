@@ -1,6 +1,7 @@
 package com.fec.ex.sensorz;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,14 +18,5 @@ public class SensorActivity extends AppCompatActivity {
         ft.add(fragment, "SensorList");
         ft.replace(R.id.SensorListPlaceholder, fragment);
         ft.commit();
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
-        } else {
-            this.finish();
-        }
     }
 }
