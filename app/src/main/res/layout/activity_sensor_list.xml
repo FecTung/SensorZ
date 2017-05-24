@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fec.ex.sensorz.view.SensorActivity">
+    tools:context="com.fec.ex.sensorz.view.SensorListActivity">
 
     <FrameLayout
-        android:id="@+id/SensorPlaceholder"
+        android:id="@+id/SensorListPlaceholder"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </FrameLayout>

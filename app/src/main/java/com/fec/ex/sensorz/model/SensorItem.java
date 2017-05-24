@@ -1,4 +1,4 @@
-package com.fec.ex.sensorz;
+package com.fec.ex.sensorz.model;
 
 /**
  * Created by Fe2Cu on 2017.05.16.

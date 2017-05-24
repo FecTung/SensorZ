@@ -1,18 +1,21 @@
-package com.fec.ex.sensorz;
+package com.fec.ex.sensorz.view;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import com.fec.ex.sensorz.R;
+import com.fec.ex.sensorz.model.SensorItem;
+import com.fec.ex.sensorz.model.SensorRvAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,33 +28,10 @@ public class SensorListFragment extends Fragment {
     private SensorManager mSensorManager;
     private List<Sensor> mSensorList;
 
-//    private static final String SENSOR_NAME = "name";
-//    private static final String SENSOR_TYPE = "type";
-//    private String mSensorName;
-//    private String mSensorType;
-//
-//
-//    public static SensorListFragment newInstance(String name, String type) {
-//        SensorListFragment fragment = new SensorListFragment();
-//        Bundle args = new Bundle();
-//        args.putString(SENSOR_NAME, name);
-//        args.putString(SENSOR_TYPE, type);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
 
     public SensorListFragment() {
         // Required empty public constructor
     }
-
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mSensorName = getArguments().getString(SENSOR_NAME);
-//            mSensorType = getArguments().getString(SENSOR_TYPE);
-//        }
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,33 +48,40 @@ public class SensorListFragment extends Fragment {
         mSensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
         mSensorItems = InitSensorItems(mSensorList);
 
+
         SensorRvAdapter adapter = new SensorRvAdapter(getActivity(), mSensorItems);
         adapter.setOnItemClickListener(new SensorRvAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Sensor sensor = mSensorList.get(position);
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.SensorListPlaceholder, SensorFragment.newInstance(sensor.getName(), sensor.getType()))
-                        .addToBackStack("SensorList")
-                        .commit();
+                Intent intent = new Intent(getContext(), SensorActivity.class);
+                intent.putExtra("SensorName", sensor.getName());
+                intent.putExtra("SensorType", sensor.getType());
+                startActivity(intent);
             }
         });
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        Snackbar.make(view, "GET ALL SENSORS COMPLETED.",Snackbar.LENGTH_SHORT).setAction("I SEE", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        }).show();
     }
 
     private ArrayList<SensorItem> InitSensorItems(List<Sensor> sensorList) {
         ArrayList<SensorItem> sensorItems = new ArrayList<>();
-        ArrayList<Integer> sensorIndex = new ArrayList<>();
+//        ArrayList<Integer> sensorIndex = new ArrayList<>();
         for (Sensor sensor : sensorList) {
             //Skip the repeated sensors by Sensor.getType()
-            if (sensorIndex.contains(sensor.getType())) {
-                continue;
-            } else {
-                sensorIndex.add(sensor.getType());
-            }
+//            if (sensorIndex.contains(sensor.getType())) {
+//                continue;
+//            } else {
+//                sensorIndex.add(sensor.getType());
+//            }
             sensorItems.add(new SensorItem(sensor.getName(), sensor.getType()));
         }
         return sensorItems;
