@@ -4,11 +4,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import com.fec.ex.sensorz.R;
 
 public class SensorActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
     private String mSensorName;
     private int mSensorType;
 
@@ -16,6 +18,9 @@ public class SensorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setUpToolbar();
 
         mSensorName = getIntent().getStringExtra("SensorName");
         mSensorType = getIntent().getIntExtra("SensorType", -1);
@@ -32,5 +37,9 @@ public class SensorActivity extends AppCompatActivity {
         ft.commit();
     }
 
+    private void setUpToolbar() {
+        setSupportActionBar(toolbar);
+
+    }
 
 }

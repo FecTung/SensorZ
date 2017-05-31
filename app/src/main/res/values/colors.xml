@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4a9de6</color>
-    <color name="colorPrimaryDark">#4a9de6</color>
-    <color name="colorAccent">#ff406d</color>
+    <color name="colorPrimary">#121212</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#0080ff</color>
+    <color name="colorText">#f0f0f0</color>
+    <color name="colorCardBackground">#202020</color>
+    <color name="colorCardItemTitle">#171717</color>
+    <color name="colorCardItemContent">#202020</color>
+    <color name="colorCardItemText">#fefefe</color>
 </resources>
