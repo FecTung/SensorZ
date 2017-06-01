@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -172,6 +174,8 @@ public class SensorFragment extends Fragment implements SensorEventListener {
         if (mRotationVector != null) {
             mSensorManager.registerListener(this, mRotationVector, SensorManager.SENSOR_DELAY_NORMAL);
         }
+
+        handleBackEvent();
     }
 
     @Override
@@ -243,23 +247,21 @@ public class SensorFragment extends Fragment implements SensorEventListener {
             }).show();
         }
     }
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        getView().setFocusableInTouchMode(true);
-//        getView().requestFocus();
-//        getView().setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
-//                    getActivity().getSupportFragmentManager().popBackStack("SensorList", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
-//    }
+
+    private void handleBackEvent() {
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                    getActivity().getSupportFragmentManager().popBackStack("SensorList", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
