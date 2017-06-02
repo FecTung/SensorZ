@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#0080ff</color>
     <color name="colorText">#f0f0f0</color>
+    <color name="colorTextSecond">#eeeeee</color>
     <color name="colorCardBackground">#202020</color>
     <color name="colorCardItemTitle">#171717</color>
     <color name="colorCardItemContent">#202020</color>
