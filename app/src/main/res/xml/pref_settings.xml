@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="View Settings">
+        <SwitchPreference
+            android:key="pref_show_more"
+            android:summary="Enable this will show more sensors. It will not filtrate sensors by type."
+            android:title="Show more sensors type" />
+    </PreferenceCategory>
 </PreferenceScreen>
