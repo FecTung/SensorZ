@@ -1,6 +1,5 @@
 package com.fec.ex.sensorz.view;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -48,7 +47,8 @@ public class SensorListActivity extends AppCompatActivity {
         tvNvFooter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SensorListActivity.this, SettingsActivity.class));
+                drawerLayout.closeDrawer(GravityCompat.START);
+                getSupportFragmentManager().beginTransaction().addToBackStack("SensorList").replace(R.id.SensorListPlaceholder, new SettingsFragment()).commit();
             }
         });
     }

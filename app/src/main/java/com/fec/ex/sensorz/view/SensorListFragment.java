@@ -1,9 +1,11 @@
 package com.fec.ex.sensorz.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -28,7 +30,7 @@ public class SensorListFragment extends Fragment {
     private ArrayList<SensorItem> mSensorItems;
     private SensorManager mSensorManager;
     private List<Sensor> mSensorList;
-
+    private SharedPreferences sharedPreferences;
 
     public SensorListFragment() {
         // Required empty public constructor
@@ -48,7 +50,7 @@ public class SensorListFragment extends Fragment {
         mSensorManager = (SensorManager) getActivity().getSystemService(SENSOR_SERVICE);
         mSensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
         mSensorItems = InitSensorItems(mSensorList);
-
+        sharedPreferences = android.support.v7.preference.PreferenceManager.getDefaultSharedPreferences(getContext());
 
         SensorRvAdapter adapter = new SensorRvAdapter(getActivity(), mSensorItems);
         adapter.setOnItemClickListener(new SensorRvAdapter.OnItemClickListener() {
@@ -90,9 +92,13 @@ public class SensorListFragment extends Fragment {
     private ArrayList<SensorItem> InitSensorItems(List<Sensor> sensorList) {
         ArrayList<SensorItem> sensorItems = new ArrayList<>();
         ArrayList<Integer> sensorIndex = new ArrayList<>();
+        boolean showMore = false;
+        if (sharedPreferences!=null) {
+            showMore = sharedPreferences.getBoolean("pref_show_more", false);
+        }
         for (Sensor sensor : sensorList) {
 //            Skip the repeated sensors by Sensor.getType()
-            if (sensorIndex.contains(sensor.getType())) {
+            if (!showMore && sensorIndex.contains(sensor.getType())) {
                 continue;
             } else {
                 sensorIndex.add(sensor.getType());
