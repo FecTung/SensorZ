@@ -1,10 +1,13 @@
 package com.fec.ex.sensorz.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Fe2Cu on 2017.05.16.
  */
 
-public class SensorItem {
+public class SensorItem implements Parcelable{
 
     private String sensorName;
     private int sensorType;
@@ -60,4 +63,36 @@ public class SensorItem {
     public void setSensorValue(String sensorValue) {
         this.sensorValue = sensorValue;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.imgID);
+        dest.writeInt(this.sensorType);
+        dest.writeString(this.sensorName);
+        dest.writeString(this.sensorValue);
+    }
+
+    protected SensorItem(Parcel in) {
+        this.imgID = in.readInt();
+        this.sensorType = in.readInt();
+        this.sensorName = in.readString();
+        this.sensorValue = in.readString();
+    }
+
+    public static final Parcelable.Creator<SensorItem> CREATOR = new Parcelable.Creator<SensorItem>() {
+        @Override
+        public SensorItem createFromParcel(Parcel source) {
+            return new SensorItem(source);
+        }
+
+        @Override
+        public SensorItem[] newArray(int size) {
+            return new SensorItem[size];
+        }
+    };
 }
