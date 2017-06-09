@@ -23,7 +23,7 @@
         <activity android:name=".view.SensorActivity" />
         <activity
             android:theme="@style/PreferencesTheme"
-            android:name=".view.SettingsActivity"
+            android:name=".view.SettingsFragment"
             android:label="@string/title_activity_settings"></activity>
     </application>
 
