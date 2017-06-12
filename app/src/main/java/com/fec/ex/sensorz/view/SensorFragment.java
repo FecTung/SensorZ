@@ -17,6 +17,9 @@ import android.widget.TextView;
 
 import com.fec.ex.sensorz.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.content.Context.SENSOR_SERVICE;
 
 public class SensorFragment extends Fragment implements SensorEventListener {
@@ -57,6 +60,8 @@ public class SensorFragment extends Fragment implements SensorEventListener {
     private Sensor mHumidity;               // TYPE_RELATIVE_HUMIDITY
     private Sensor mRotationVector;         // TYPE_ROTATION_VECTOR
 
+    private List<Sensor> mSensorList;
+
     public SensorFragment() {
     }
 
@@ -96,6 +101,8 @@ public class SensorFragment extends Fragment implements SensorEventListener {
         tvSensorValue.setText("VALUE");
 
         mSensorManager = (SensorManager) getActivity().getSystemService(SENSOR_SERVICE);
+        mSensorList = new ArrayList<Sensor>();
+
         getSensorInstance();
         getValueSucceed(view);
     }
@@ -141,38 +148,8 @@ public class SensorFragment extends Fragment implements SensorEventListener {
     @Override
     public void onResume() {
         super.onResume();
-        if (mAccelerometer != null) {
-            mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        if (mAmbientTemperature != null) {
-            mSensorManager.registerListener(this, mAmbientTemperature, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        if (mGravity != null) {
-            mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        if (mGyroscope != null) {
-            mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        if (mLight != null) {
-            mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        if (mLinearAcceleration != null) {
-            mSensorManager.registerListener(this, mLinearAcceleration, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        if (mMagneticField != null) {
-            mSensorManager.registerListener(this, mMagneticField, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        if (mPressure != null) {
-            mSensorManager.registerListener(this, mPressure, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        if (mProximity != null) {
-            mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        if (mHumidity != null) {
-            mSensorManager.registerListener(this, mHumidity, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        if (mRotationVector != null) {
-            mSensorManager.registerListener(this, mRotationVector, SensorManager.SENSOR_DELAY_NORMAL);
+        for (Sensor sensor : mSensorList) {
+            sensorRegisterEvent(sensor, true);
         }
 
         handleBackEvent();
@@ -181,53 +158,50 @@ public class SensorFragment extends Fragment implements SensorEventListener {
     @Override
     public void onPause() {
         super.onPause();
-        if (mAccelerometer != null) {
-            mSensorManager.unregisterListener(this);
+        for (Sensor sensor : mSensorList) {
+            sensorRegisterEvent(sensor, false);
         }
-        if (mAmbientTemperature != null) {
-            mSensorManager.unregisterListener(this);
-        }
-        if (mGravity != null) {
-            mSensorManager.unregisterListener(this);
-        }
-        if (mGyroscope != null) {
-            mSensorManager.unregisterListener(this);
-        }
-        if (mLight != null) {
-            mSensorManager.unregisterListener(this);
-        }
-        if (mLinearAcceleration != null) {
-            mSensorManager.unregisterListener(this);
-        }
-        if (mMagneticField != null) {
-            mSensorManager.unregisterListener(this);
-        }
-        if (mPressure != null) {
-            mSensorManager.unregisterListener(this);
-        }
-        if (mProximity != null) {
-            mSensorManager.unregisterListener(this);
-        }
-        if (mHumidity != null) {
-            mSensorManager.unregisterListener(this);
-        }
-        if (mRotationVector != null) {
-            mSensorManager.unregisterListener(this);
+    }
+
+    private void sensorRegisterEvent(Sensor sensor, boolean flag) {
+        if (sensor != null) {
+            if (flag) {
+                mSensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+            } else {
+                mSensorManager.unregisterListener(this);
+            }
         }
     }
 
     private void getSensorInstance() {
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        addSensor(mAccelerometer);
         mAmbientTemperature = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+        addSensor(mAmbientTemperature);
         mGravity = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
+        addSensor(mGravity);
         mGyroscope = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        addSensor(mGyroscope);
         mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        addSensor(mLight);
         mLinearAcceleration = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+        addSensor(mLinearAcceleration);
         mMagneticField = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        addSensor(mMagneticField);
         mPressure = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
+        addSensor(mPressure);
         mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        addSensor(mProximity);
         mHumidity = mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
+        addSensor(mHumidity);
         mRotationVector = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+        addSensor(mRotationVector);
+    }
+
+    private void addSensor(Sensor sensor) {
+        if (sensor != null) {
+            mSensorList.add(sensor);
+        }
     }
 
     private void getValueSucceed(View view) {
@@ -254,7 +228,7 @@ public class SensorFragment extends Fragment implements SensorEventListener {
         getView().setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                     getActivity().getSupportFragmentManager().popBackStack("SensorList", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     return true;
                 }

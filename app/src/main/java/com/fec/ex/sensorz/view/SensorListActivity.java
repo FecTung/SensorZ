@@ -37,6 +37,7 @@ public class SensorListActivity extends AppCompatActivity {
         setUpFooter();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.right_in, R.anim.left_out);
         Fragment fragment = new SensorListFragment();
         ft.add(fragment, "SensorList");
         ft.replace(R.id.SensorListPlaceholder, fragment);
@@ -48,7 +49,9 @@ public class SensorListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 drawerLayout.closeDrawer(GravityCompat.START);
-                getSupportFragmentManager().beginTransaction().addToBackStack("SensorList").replace(R.id.SensorListPlaceholder, new SettingsFragment()).commit();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.setCustomAnimations(R.anim.right_in, R.anim.right_out);
+                ft.addToBackStack("SensorList").replace(R.id.SensorListPlaceholder, new SettingsFragment()).commit();
             }
         });
     }

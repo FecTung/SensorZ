@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -64,19 +63,13 @@ public class SensorListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        Snackbar.make(view, "GET ALL SENSORS COMPLETED.", Snackbar.LENGTH_SHORT).setAction("I SEE", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        }).show();
     }
 
     private void holdByFragment(int position) {
         Sensor sensor = mSensorList.get(position);
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .addToBackStack("SensorList")
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.right_in, R.anim.left_out);
+        ft.addToBackStack("SensorList")
                 .replace(R.id.SensorListPlaceholder, SensorFragment.newInstance(sensor.getName(), sensor.getType()))
                 .commit();
     }

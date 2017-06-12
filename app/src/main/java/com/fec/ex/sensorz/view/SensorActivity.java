@@ -26,6 +26,7 @@ public class SensorActivity extends AppCompatActivity {
         mSensorType = getIntent().getIntExtra("SensorType", -1);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.right_in, R.anim.left_out);
         Fragment fragment;
         if (mSensorName != null && mSensorType != -1) {
             fragment = SensorFragment.newInstance(mSensorName, mSensorType);
